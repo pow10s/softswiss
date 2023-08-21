@@ -1,0 +1,32 @@
+{
+    "name": "pow10s/softswiss",
+    "description": "Softswiss API aggregator",
+    "authors": [
+        {
+            "name": "stosdima",
+            "email": "stosdima@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Pow10s\\Softswiss\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Pow10s\\Softswiss\\": "tests/"
+        }
+    },
+    "require": {
+        "illuminate/support": "^10.19",
+        "guzzlehttp/guzzle": "^7.7",
+        "laravel/helpers": "^1.6"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Pow10s\\Softswiss\\SoftswissServiceProvider"
+            ]
+        }
+    }
+}
