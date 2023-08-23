@@ -2,7 +2,7 @@
 
 namespace Pow10s\Softswiss\Client\Request\DTO;
 
-readonly class SessionInitDTO
+readonly class SessionInitRequest
 {
     public function __construct(
         public mixed    $balance = null,

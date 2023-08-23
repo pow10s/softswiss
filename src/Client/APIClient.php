@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Pow10s\Softswiss\Client;
 
 use Pow10s\Softswiss\Client\Request\RequestParams;
-use Pow10s\Softswiss\Client\Request\DTO\SessionInitDTO;
+use Pow10s\Softswiss\Client\Request\DTO\SessionInitRequest;
+use Pow10s\Softswiss\Client\Response\DTO\StartGameResponse;
 use Pow10s\Softswiss\Traits\HTTPConsumable;
 
 class APIClient
@@ -21,46 +22,49 @@ class APIClient
         'DOGE' => 'DOG',
     ];
 
-    public function getDemoGame(SessionInitDTO $sessionInitDTO)
+    public function getDemoGame(SessionInitRequest $sessionInitRequest): StartGameResponse
     {
         $params = RequestParams::builder()
-            ->setGameIdentifier($sessionInitDTO->game)
-            ->setLocale($sessionInitDTO->locale)
-            ->setIp($sessionInitDTO->ip)
-            ->setClientType($sessionInitDTO->client_type)
-            ->withUrls($sessionInitDTO->urls)
+            ->setGameIdentifier($sessionInitRequest->game)
+            ->setLocale($sessionInitRequest->locale)
+            ->setIp($sessionInitRequest->ip)
+            ->setClientType($sessionInitRequest->client_type)
+            ->withUrls($sessionInitRequest->urls)
             ->build()
             ->toArray();
-
-        return $this->send(
+        $response = $this->send(
             action: self::ACTIONS[__FUNCTION__],
             data: $params
+        )['launch_options'];
+
+        return new StartGameResponse(
+            game_url: $response['game_url'],
+            strategy: $response['strategy']
         );
     }
 
-    public function getGame(SessionInitDTO $sessionInitDTO)
+    public function getGame(SessionInitRequest $sessionInitRequest): StartGameResponse
     {
-        $currency = self::CURRENCIES_MAP[$sessionInitDTO->currency] ?? $sessionInitDTO->currency;
+        $currency = self::CURRENCIES_MAP[$sessionInitRequest->currency] ?? $sessionInitRequest->currency;
         $params = RequestParams::builder()
-            ->setBalance($sessionInitDTO->balance)
-            ->setClientType($sessionInitDTO->client_type)
+            ->setBalance($sessionInitRequest->balance)
+            ->setClientType($sessionInitRequest->client_type)
             ->setCurrency($currency)
-            ->setGameIdentifier($sessionInitDTO->game)
-            ->setIp($sessionInitDTO->ip)
-            ->setLocale($sessionInitDTO->locale)
-            ->withUrls($sessionInitDTO->urls)
-            ->withUser($sessionInitDTO->user)
+            ->setGameIdentifier($sessionInitRequest->game)
+            ->setIp($sessionInitRequest->ip)
+            ->setLocale($sessionInitRequest->locale)
+            ->withUrls($sessionInitRequest->urls)
+            ->withUser($sessionInitRequest->user)
             ->build()
             ->toArray();
-
-        return $this->send(
+        $response = $this->send(
             action: self::ACTIONS[__FUNCTION__],
             data: $params
+        )['launch_options'];
+
+        return new StartGameResponse(
+            game_url: $response['game_url'],
+            strategy: $response['strategy']
         );
-    }
-
-    public function getGamesList(string $provider)
-    {
-
     }
 }

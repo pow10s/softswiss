@@ -2,7 +2,7 @@
 
 namespace Pow10s\Softswiss\Client\Response\DTO;
 
-class StartGameDTO
+final readonly class StartGameResponse
 {
     public function __construct(
         string $game_url,

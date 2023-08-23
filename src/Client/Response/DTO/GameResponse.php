@@ -4,7 +4,7 @@ namespace Pow10s\Softswiss\Client\Response\DTO;
 
 use Carbon\Carbon;
 
-final readonly class GameDTO
+final readonly class GameResponse
 {
     public function __construct(
         string $title,

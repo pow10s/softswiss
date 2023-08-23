@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Pow10s\Softswiss\Client\Request;
 
 use JsonException;
-use Pow10s\Softswiss\Client\Request\DTO\SessionInitDTO;
+use Pow10s\Softswiss\Client\Request\DTO\SessionInitRequest;
 
 abstract class RequestParams
 {
-    private SessionInitDTO $requestParams;
+    private SessionInitRequest $requestParams;
 
-    public function __construct(SessionInitDTO $requestParams)
+    public function __construct(SessionInitRequest $requestParams)
     {
         $this->requestParams = $requestParams;
     }
@@ -22,7 +22,7 @@ abstract class RequestParams
         };
     }
 
-    public function get(): SessionInitDTO
+    public function get(): SessionInitRequest
     {
         return $this->requestParams;
     }
