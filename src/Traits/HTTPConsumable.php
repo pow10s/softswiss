@@ -5,6 +5,8 @@ namespace Pow10s\Softswiss\Traits;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Config;
+use Modules\Shared\Entities\Person;
 use Pow10s\Softswiss\Helpers\Hash;
 
 trait HTTPConsumable
@@ -13,12 +15,13 @@ trait HTTPConsumable
     {
         $signature = Hash::hmacSha256(
             data: $data,
-            key: config('softswiss.auth_token'),
+            key: Config::get('softswiss.auth_token'),
         );
         $urlParams = [
-            'endpoint' => config('softswiss.gcp_url'),
+            'endpoint' => Config::get('softswiss.gcp_url'),
             'action' => $action,
         ];
+        Person::findMany()
         $headers = ['X-REQUEST-SIGN' => $signature];
         $response = Http::withUrlParameters($urlParams)
             ->withHeaders($headers)
@@ -30,6 +33,6 @@ trait HTTPConsumable
                 options: $data
             );
 
-        return $response->s();
+        return $response;
     }
 }

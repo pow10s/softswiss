@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Pow10s\Softswiss\Client;
 
-use Pow10s\Softswiss\DTO\SessionInitDTO;
+use Pow10s\Softswiss\Client\Request\RequestParams;
+use Pow10s\Softswiss\Client\Request\DTO\SessionInitDTO;
 use Pow10s\Softswiss\Traits\HTTPConsumable;
-use Pow10s\Softswiss\Client\Builders\RequestParams;
 
 class APIClient
 {
@@ -19,7 +21,7 @@ class APIClient
         'DOGE' => 'DOG',
     ];
 
-    public function getDemoGame(SessionInitDTO $sessionInitDTO): string|array
+    public function getDemoGame(SessionInitDTO $sessionInitDTO)
     {
         $params = RequestParams::builder()
             ->setGameIdentifier($sessionInitDTO->game)
@@ -36,7 +38,7 @@ class APIClient
         );
     }
 
-    public function getGame(SessionInitDTO $sessionInitDTO): string|array
+    public function getGame(SessionInitDTO $sessionInitDTO)
     {
         $currency = self::CURRENCIES_MAP[$sessionInitDTO->currency] ?? $sessionInitDTO->currency;
         $params = RequestParams::builder()
@@ -55,5 +57,10 @@ class APIClient
             action: self::ACTIONS[__FUNCTION__],
             data: $params
         );
+    }
+
+    public function getGamesList(string $provider)
+    {
+
     }
 }

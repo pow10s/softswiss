@@ -1,6 +1,6 @@
 <?php
 
-namespace Pow10s\Softswiss\DTO;
+namespace Pow10s\Softswiss\Client\Request\DTO;
 
 readonly class UserDTO
 {

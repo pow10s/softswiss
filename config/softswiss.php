@@ -5,4 +5,5 @@ return [
     'auth_token' => env('SOFTSWISS_AUTH_TOKEN'),
     'casino_id' => env('SOFTSWISS_CASINO_ID'),
     'wallet_uri' => env('SOFTSWISS_WALLET_URI', 'webhook/softswiss'),
+    'excluded_providers' => env('SOFTSWISS_EXCLUDED_PROVIDERS'),
 ];

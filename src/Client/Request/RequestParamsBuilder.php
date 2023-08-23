@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Pow10s\Softswiss\Client\Builders;
+namespace Pow10s\Softswiss\Client\Request;
 
-use Pow10s\Softswiss\DTO\SessionInitDTO;
-use Pow10s\Softswiss\DTO\UrlDTO;
-use Pow10s\Softswiss\DTO\UserDTO;
 use Pow10s\Softswiss\Client\Interfaces\BuilderInterface;
+use Pow10s\Softswiss\Client\Request\DTO\SessionInitDTO;
+use Pow10s\Softswiss\Client\Request\DTO\UrlDTO;
+use Pow10s\Softswiss\Client\Request\DTO\UserDTO;
+use Illuminate\Support\Facades\Config;
 
 abstract class RequestParamsBuilder implements BuilderInterface
 {
@@ -31,7 +32,7 @@ abstract class RequestParamsBuilder implements BuilderInterface
 
     public function __construct()
     {
-        $this->setCasinoId(config('softswiss.casino_id'));
+        $this->setCasinoId(Config::get('softswiss.casino_id'));
     }
 
     public function withUser(UserDTO $params): self

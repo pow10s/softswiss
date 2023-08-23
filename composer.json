@@ -3,7 +3,7 @@
     "description": "Softswiss API aggregator",
     "authors": [
         {
-            "name": "stosdima",
+            "name": "pow10s",
             "email": "stosdima@gmail.com"
         }
     ],
@@ -18,15 +18,33 @@
         }
     },
     "require": {
-        "illuminate/support": "^10.19",
         "guzzlehttp/guzzle": "^7.7",
-        "laravel/helpers": "^1.6"
+        "illuminate/database": "^10.19",
+        "illuminate/http": "^10.19",
+        "illuminate/routing": "^10.19",
+        "illuminate/support": "^10.19",
+        "laravel/helpers": "^1.6",
+        "symfony/yaml": "^6.3"
+    },
+    "require-dev": {
+        "illuminate/config": "^10.19"
     },
     "extra": {
         "laravel": {
             "providers": [
                 "Pow10s\\Softswiss\\SoftswissServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Yaml": "Symfony\\Component\\Yaml\\Yaml"
+            }
         }
-    }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

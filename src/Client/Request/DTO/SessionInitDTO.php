@@ -1,11 +1,10 @@
 <?php
 
-namespace Pow10s\Softswiss\DTO;
+namespace Pow10s\Softswiss\Client\Request\DTO;
 
 readonly class SessionInitDTO
 {
     public function __construct(
-        public ?string  $casino_id = null,
         public mixed    $balance = null,
         public ?string  $client_type = null,
         public ?string  $currency = null,
@@ -14,5 +13,6 @@ readonly class SessionInitDTO
         public ?string  $locale = null,
         public ?UrlDTO  $urls = null,
         public ?UserDTO $user = null,
+        public ?string  $casino_id = null,
     ) { }
 }

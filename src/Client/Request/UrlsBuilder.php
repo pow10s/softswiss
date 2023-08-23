@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Pow10s\Softswiss\Client\Builders;
+namespace Pow10s\Softswiss\Client\Request;
 
-use Pow10s\Softswiss\DTO\UrlDTO;
 use Pow10s\Softswiss\Client\Interfaces\BuilderInterface;
+use Pow10s\Softswiss\Client\Request\DTO\UrlDTO;
 
 class UrlsBuilder implements BuilderInterface
 {
