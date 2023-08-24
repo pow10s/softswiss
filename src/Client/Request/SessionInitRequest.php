@@ -1,8 +1,8 @@
 <?php
 
-namespace Pow10s\Softswiss\Client\Request\DTO;
+namespace Pow10s\Softswiss\Client\Request;
 
-readonly class SessionInitRequest
+final readonly class SessionInitRequest
 {
     public function __construct(
         public mixed    $balance = null,
@@ -14,5 +14,7 @@ readonly class SessionInitRequest
         public ?UrlDTO  $urls = null,
         public ?UserDTO $user = null,
         public ?string  $casino_id = null,
+        public ?string  $jurisdiction = null,
+        public ?string  $payload = null
     ) { }
 }

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Pow10s\Softswiss\Client\Request;
+namespace Pow10s\Softswiss\Client\Request\Builder;
 
 use Carbon\Carbon;
 use Pow10s\Softswiss\Client\Interfaces\BuilderInterface;
-use Pow10s\Softswiss\Client\Request\DTO\UserDTO;
+use Pow10s\Softswiss\Client\Request\UserDTO;
 
 class UserBuilder implements BuilderInterface
 {

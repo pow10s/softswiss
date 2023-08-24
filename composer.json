@@ -9,7 +9,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "Pow10s\\Softswiss\\": "src/"
+            "Pow10s\\Softswiss\\": "src/",
+            "Pow10s\\Softswiss\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
@@ -19,6 +20,7 @@
     },
     "require": {
         "guzzlehttp/guzzle": "^7.7",
+        "illuminate/console": "^10.23",
         "illuminate/database": "^10.19",
         "illuminate/http": "^10.19",
         "illuminate/routing": "^10.19",

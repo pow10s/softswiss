@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Pow10s\Softswiss\Client\Request;
+namespace Pow10s\Softswiss\Client\Request\Builder;
 
 use JsonException;
-use Pow10s\Softswiss\Client\Request\DTO\SessionInitRequest;
+use Pow10s\Softswiss\Client\Request\SessionInitRequest;
 
 abstract class RequestParams
 {

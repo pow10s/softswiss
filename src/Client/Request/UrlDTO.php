@@ -1,8 +1,8 @@
 <?php
 
-namespace Pow10s\Softswiss\Client\Request\DTO;
+namespace Pow10s\Softswiss\Client\Request;
 
-readonly class UrlDTO
+final readonly class UrlDTO
 {
     public function __construct(
         public ?string $return_url,

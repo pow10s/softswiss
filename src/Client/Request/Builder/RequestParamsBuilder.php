@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Pow10s\Softswiss\Client\Request;
+namespace Pow10s\Softswiss\Client\Request\Builder;
 
-use Pow10s\Softswiss\Client\Interfaces\BuilderInterface;
-use Pow10s\Softswiss\Client\Request\DTO\SessionInitRequest;
-use Pow10s\Softswiss\Client\Request\DTO\UrlDTO;
-use Pow10s\Softswiss\Client\Request\DTO\UserDTO;
 use Illuminate\Support\Facades\Config;
+use Pow10s\Softswiss\Client\Interfaces\BuilderInterface;
+use Pow10s\Softswiss\Client\Request\SessionInitRequest;
+use Pow10s\Softswiss\Client\Request\UrlDTO;
+use Pow10s\Softswiss\Client\Request\UserDTO;
 
 abstract class RequestParamsBuilder implements BuilderInterface
 {
@@ -116,7 +116,6 @@ abstract class RequestParamsBuilder implements BuilderInterface
     public function build(): RequestParams
     {
         $requestParams = new SessionInitRequest(
-            casino_id: $this->casinoId,
             balance: $this->balance,
             client_type: $this->clientType,
             currency: $this->currency,
@@ -125,6 +124,7 @@ abstract class RequestParamsBuilder implements BuilderInterface
             locale: $this->locale,
             urls: $this->urls,
             user: $this->user,
+            casino_id: $this->casinoId,
         );
 
         return new class ($requestParams) extends RequestParams {
