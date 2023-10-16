@@ -2,7 +2,9 @@
 
 namespace Pow10s\Softswiss\Client\Request;
 
-final readonly class SessionInitRequest
+use Pow10s\Softswiss\Client\DTO;
+
+final readonly class SessionInitRequest extends DTO
 {
     public function __construct(
         public mixed    $balance = null,

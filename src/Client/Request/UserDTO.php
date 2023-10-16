@@ -2,7 +2,9 @@
 
 namespace Pow10s\Softswiss\Client\Request;
 
-final readonly class UserDTO
+use Pow10s\Softswiss\Client\DTO;
+
+final readonly class UserDTO extends DTO
 {
     public function __construct(
         public ?string $id,

@@ -3,8 +3,9 @@
 namespace Pow10s\Softswiss\Client\Response;
 
 use Carbon\Carbon;
+use Pow10s\Softswiss\Client\DTO;
 
-final readonly class Game
+final readonly class Game extends DTO
 {
     public function __construct(
         public string $title,
