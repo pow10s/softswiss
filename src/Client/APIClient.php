@@ -68,8 +68,9 @@ class APIClient implements Interfaces\SoftswissAPIClientInterface
         $response = $request->json();
         if ($request->successful() === false) {
             throw new SoftswissAPIClientException(
-                statusCode: $response['code'],
+                statusCode: $request->status(),
                 message: $response['message'] ?? 'Unknown error',
+                code: $response['code'] ?? 0,
             );
         }
 
