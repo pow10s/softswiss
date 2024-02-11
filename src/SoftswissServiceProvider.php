@@ -32,7 +32,7 @@ class SoftswissServiceProvider extends ServiceProvider
         Route::middlewareGroup('softswiss', Config::get('softswiss.middleware', []));
 
         $this->registerRoutes();
-        $this->registerMigrations();
+//        $this->registerMigrations();
     }
 
     public function registerRoutes(): void
