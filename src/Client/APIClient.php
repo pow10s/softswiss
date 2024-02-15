@@ -107,7 +107,7 @@ class APIClient implements Interfaces\SoftswissAPIClientInterface
         $response = $response['launch_options'];
 
         return new StartGameResponse(
-            game_url: $response['game_url'],
+            game_url: $response['game_url'] ?? $response['desktop_url'] ?? '',
             strategy: $response['strategy'],
             launch_options: $response
         );
@@ -149,7 +149,7 @@ class APIClient implements Interfaces\SoftswissAPIClientInterface
         $response = $response['launch_options'];
 
         return new StartGameResponse(
-            game_url: $response['game_url'],
+            game_url: $response['game_url'] ?? $response['desktop_url'] ?? '',
             strategy: $response['strategy'],
             launch_options: $response
         );
