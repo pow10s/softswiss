@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Pow10s\Softswiss\Console;
 
 use Illuminate\Console\Command;

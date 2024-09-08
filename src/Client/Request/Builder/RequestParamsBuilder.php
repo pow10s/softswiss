@@ -127,7 +127,8 @@ abstract class RequestParamsBuilder implements BuilderInterface
             casino_id: $this->casinoId,
         );
 
-        return new class ($requestParams) extends RequestParams {
+        return new class ($requestParams) extends RequestParams
+        {
         };
     }
 }

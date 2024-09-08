@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Pow10s\Softswiss;
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Pow10s\Softswiss\Client\APIClient;
 use Pow10s\Softswiss\Client\Interfaces\SoftswissAPIClientInterface;
@@ -45,7 +45,8 @@ class SoftswissServiceProvider extends ServiceProvider
             ],
             function () {
                 $this->loadRoutesFrom(__DIR__ . '/Http/routes.php');
-            });
+            }
+        );
     }
 
     public function registerPublishing(): void
@@ -56,7 +57,7 @@ class SoftswissServiceProvider extends ServiceProvider
             ], 'softswiss-config');
 
             $this->publishes([
-                __DIR__ . '/../database/migrations' => $this->app->databasePath('migrations')
+                __DIR__ . '/../database/migrations' => $this->app->databasePath('migrations'),
             ], 'softswiss-migrations');
         }
     }
@@ -78,7 +79,7 @@ class SoftswissServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 InstallCommand::class,
-                UploadGamesCommand::class
+                UploadGamesCommand::class,
             ]);
         }
     }

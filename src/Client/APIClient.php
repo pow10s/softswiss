@@ -10,20 +10,18 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 use JsonException;
 use Pow10s\Softswiss\Client\Exceptions\ClientException;
-use Pow10s\Softswiss\Client\Exceptions\FreespinException;
-use Pow10s\Softswiss\Client\Exceptions\InformationalException;
-use Pow10s\Softswiss\Client\Exceptions\LiveGameException;
 use Pow10s\Softswiss\Client\Exceptions\ParserException;
-use Pow10s\Softswiss\Client\Exceptions\ServerException;
 use Pow10s\Softswiss\Client\Exceptions\SoftswissAPIClientException;
 use Pow10s\Softswiss\Client\Request\Builder\RequestParams;
+use Pow10s\Softswiss\Client\Request\RoundDetailsRequestDTO;
 use Pow10s\Softswiss\Client\Request\SessionInitRequest;
 use Pow10s\Softswiss\Client\Response\Factories\GameFactory;
+use Pow10s\Softswiss\Client\Response\Factories\ResponseFactory;
 use Pow10s\Softswiss\Client\Response\Game;
+use Pow10s\Softswiss\Client\Response\RoundDetailsResponseDTO;
 use Pow10s\Softswiss\Client\Response\StartGameResponse;
 use Pow10s\Softswiss\Helpers\Hash;
 use Pow10s\Softswiss\Helpers\Url;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Yaml\Exception\ParseException;
 
 class APIClient implements Interfaces\SoftswissAPIClientInterface
@@ -33,23 +31,27 @@ class APIClient implements Interfaces\SoftswissAPIClientInterface
     private const ACTIONS = [
         'getDemoGame' => 'demo',
         'getGame' => 'sessions',
+        'getRoundDetails' => 'rounds/details',
     ];
 
     private const CURRENCIES_MAP = [
         'DOGE' => 'DOG',
     ];
+    public function __construct(
+        private readonly ResponseFactory $responseFactory
+    ) {
+    }
 
     /**
-     * @param string $action
-     * @param array $data
-     * @param string $method
-     * @return array
      * @throws SoftswissAPIClientException
      * @throws Exception
-     *
      */
     public function send(string $action, array $data = [], string $method = 'POST'): array
     {
+        if (!isset($data['casino_id'])) {
+            $data += ['casino_id' => Config::get('softswiss.casino_id')];
+        }
+
         $signature = Hash::hmacSha256(
             data: $data,
             key: Config::get('softswiss.auth_token'),
@@ -80,8 +82,6 @@ class APIClient implements Interfaces\SoftswissAPIClientInterface
     /**
      * Get demo game start options.
      *
-     * @param SessionInitRequest $sessionInitRequest
-     * @return StartGameResponse
      * @throws JsonException
      *
      * @throws Exception
@@ -116,9 +116,6 @@ class APIClient implements Interfaces\SoftswissAPIClientInterface
     /**
      * Get real game start options.
      *
-     * @param SessionInitRequest $sessionInitRequest
-     *
-     * @return StartGameResponse
      * @throws JsonException
      *
      * @throws Exception
@@ -158,10 +155,8 @@ class APIClient implements Interfaces\SoftswissAPIClientInterface
     /**
      * Fetch games by provider.
      *
-     * @param string $provider
      * @return array<Game>
      * @throws SoftswissAPIClientException
-     *
      */
     public function fetchGamesByProvider(string $provider): array
     {
@@ -182,5 +177,21 @@ class APIClient implements Interfaces\SoftswissAPIClientInterface
                 return GameFactory::fromResponse($game);
             })
             ->all();
+    }
+
+    /**
+     * Retrieve round details.
+     *
+     * @throws SoftswissAPIClientException
+     * @throws Exception
+     */
+    public function getRoundDetails(RoundDetailsRequestDTO $roundDetailsDTO): RoundDetailsResponseDTO
+    {
+        return $this->responseFactory->fromRoundDetailsResponse(
+            $this->send(
+                action: self::ACTIONS[__FUNCTION__],
+                data: $roundDetailsDTO->toSnakeCaseArrayWithoutNulls()
+            )
+        );
     }
 }

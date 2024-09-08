@@ -16,7 +16,7 @@ class UserBuilder implements BuilderInterface
 
     private ?string $email = null;
 
-    private string|Carbon|null $registeredAt = null;
+    private string | Carbon | null $registeredAt = null;
 
     private ?string $country = null;
 
@@ -26,7 +26,7 @@ class UserBuilder implements BuilderInterface
 
     private ?string $gender = null;
 
-    private string|Carbon|null $dateOfBirth = null;
+    private string | Carbon | null $dateOfBirth = null;
 
     public function setId(string $id): self
     {
@@ -49,7 +49,7 @@ class UserBuilder implements BuilderInterface
         return $this;
     }
 
-    public function setRegisteredAt(string|Carbon|null $registeredAt): self
+    public function setRegisteredAt(string | Carbon | null $registeredAt): self
     {
         $this->registeredAt = $registeredAt;
 
@@ -84,11 +84,26 @@ class UserBuilder implements BuilderInterface
         return $this;
     }
 
-    public function setDateOfBirth(string|Carbon|null $dateOfBirth): self
+    public function setDateOfBirth(string | Carbon | null $dateOfBirth): self
     {
         $this->dateOfBirth = $dateOfBirth;
 
         return $this;
+    }
+
+    public function build(): UserDTO
+    {
+        return new UserDTO(
+            id: $this->getId(),
+            nickname: $this->getNickname(),
+            email: $this->getEmail(),
+            registered_at: $this->getRegisteredAt(),
+            country: $this->getCountry(),
+            firstname: $this->getFirstname(),
+            lastname: $this->getLastname(),
+            gender: $this->getGender(),
+            date_of_birth: $this->getDateOfBirth(),
+        );
     }
 
     private function getId(): ?string
@@ -106,7 +121,7 @@ class UserBuilder implements BuilderInterface
         return $this->email;
     }
 
-    private function getRegisteredAt(): string|Carbon|null
+    private function getRegisteredAt(): string | Carbon | null
     {
         return $this->registeredAt;
     }
@@ -131,23 +146,8 @@ class UserBuilder implements BuilderInterface
         return $this->gender;
     }
 
-    private function getDateOfBirth(): string|Carbon|null
+    private function getDateOfBirth(): string | Carbon | null
     {
         return $this->dateOfBirth;
-    }
-
-    public function build(): UserDTO
-    {
-        return new UserDTO(
-            id: $this->getId(),
-            nickname: $this->getNickname(),
-            email: $this->getEmail(),
-            registered_at: $this->getRegisteredAt(),
-            country: $this->getCountry(),
-            firstname: $this->getFirstname(),
-            lastname: $this->getLastname(),
-            gender: $this->getGender(),
-            date_of_birth: $this->getDateOfBirth(),
-        );
     }
 }

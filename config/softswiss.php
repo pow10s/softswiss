@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'enabled' => env('SOFTSWISS_ENABLED', false),
     'gcp_url' => env('SOFTSWISS_GCP_URL', 'https://casino.int.a8r.games'),

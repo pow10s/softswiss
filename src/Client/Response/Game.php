@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Pow10s\Softswiss\Client\Response;
 
 use Carbon\Carbon;
@@ -27,8 +29,9 @@ final readonly class Game extends DTO
         public ?bool $hd = null,
         public ?float $multiplier = null,
         public ?bool $bonus_buy = null,
-        public Carbon|string|null $released_at = null,
-        public Carbon|string|null $recalled_at = null,
+        public Carbon | string | null $released_at = null,
+        public Carbon | string | null $recalled_at = null,
         public ?array $restrictions = null,
-    ) {}
+    ) {
+    }
 }

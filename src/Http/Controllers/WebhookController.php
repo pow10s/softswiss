@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Pow10s\Softswiss\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
@@ -10,7 +12,6 @@ class WebhookController extends Controller
 {
     public function __construct()
     {
-
     }
 
     public function webhook(): JsonResponse

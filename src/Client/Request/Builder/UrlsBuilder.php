@@ -27,6 +27,14 @@ class UrlsBuilder implements BuilderInterface
         return $this;
     }
 
+    public function build(): UrlDTO
+    {
+        return new UrlDTO(
+            return_url: $this->getReturnUrl(),
+            deposit_url: $this->getDepositUrl()
+        );
+    }
+
     private function getReturnUrl(): ?string
     {
         return $this->returnUrl;
@@ -35,13 +43,5 @@ class UrlsBuilder implements BuilderInterface
     private function getDepositUrl(): ?string
     {
         return $this->depositUrl;
-    }
-
-    public function build(): UrlDTO
-    {
-        return new UrlDTO(
-            return_url: $this->getReturnUrl(),
-            deposit_url: $this->getDepositUrl()
-        );
     }
 }

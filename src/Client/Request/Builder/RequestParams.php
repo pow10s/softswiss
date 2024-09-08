@@ -18,7 +18,8 @@ abstract class RequestParams
 
     public static function builder(): RequestParamsBuilder
     {
-        return new class () extends RequestParamsBuilder {
+        return new class () extends RequestParamsBuilder
+        {
         };
     }
 

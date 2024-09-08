@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Config;
 
 /**
- *
  * @property int $id
  * @property string $name
  * @property string $slug
@@ -40,7 +39,6 @@ use Illuminate\Support\Facades\Config;
  * @method static Builder|Provider whereOrder($value)
  * @method static Builder|Provider whereSlug($value)
  * @method static Builder|Provider whereUpdatedAt($value)
- *
  */
 class Provider extends Model
 {
